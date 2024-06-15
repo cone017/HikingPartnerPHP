@@ -1,0 +1,24 @@
+KORISNIK U AKTIVNOST
+
+ALTER TABLE aktivnosti
+ADD CONSTRAINT FK_korisnikId
+FOREIGN KEY (korisnikId) REFERENCES korisnik(korisnikId)
+
+KORISNIK U CLANOVIAKTIVNOSTI
+
+ALTER TABLE clanoviaktivnosti
+ADD CONSTRAINT FK_korisnikIdClan
+FOREIGN KEY (korisnikId) REFERENCES korisnik(korisnikId)
+
+AKTIVNOST U CLANOVIAKTIVNOSTI
+
+ALTER TABLE clanoviaktivnosti
+ADD CONSTRAINT FK_aktivnostIdClan
+FOREIGN KEY (aktivnostId) REFERENCES aktivnosti(aktivnostId)
+
+TIPAKTIVNOSTI U AKTIVNOST
+
+ALTER TABLE aktivnosti
+ADD CONSTRAINT FK_tipAktivnostiId
+FOREIGN KEY (tipAktivnostiId) REFERENCES tipaktivnosti(tipId)
+
