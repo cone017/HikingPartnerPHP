@@ -69,6 +69,40 @@
         }
     }
 
+    function registracijaKorisnik()
+    {
+        $imePrezime = isset($_POST["imePrezime"])?$_POST["imePrezime"]:"";
+        $mejl = isset($_POST["mejl"])?$_POST["mejl"]:"";
+        $sifra = isset($_POST["sifra"])?$_POST["sifra"]:"";
+        $telefon = isset($_POST["telefon"])?$_POST["telefon"]:"";
+        $pol = isset($_POST["pol"])?$_POST["pol"]:"";
+        $interesovanje = isset($_POST["interesovanje"])?$_POST["interesovanje"]:"";
+
+        if(!empty($imePrezime)&&!empty($mejl)&&!empty($sifra)&&!empty($telefon)&&!empty($pol)&&!empty($interesovanje))
+        {
+            $dao = new korisnikDAO();
+
+            if($dao -> registracijaKorisnik($imePrezime, $mejl, $sifra, $telefon, $pol, $interesovanje))
+            {
+                $msg = "Uspesno ste se registrovali";
+                include "../public/pocetna.php";
+            }
+
+            else
+            {
+                $msg = "Registracija nije uspela";
+                include "../public/registracija.php";
+            }
+        }
+
+        else
+        {
+            $msg = "Morate popuniti sva polja";
+            include "../public/registracija.php";
+        }
+
+    }
+
     function odjavaAdmin()
     {
         if($_SESSION["adminIme"] != "")

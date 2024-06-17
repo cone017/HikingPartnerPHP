@@ -6,6 +6,8 @@ class korisnikDAO {
 
 	// za 2. nacin resenja
 	private $LOGIN = "SELECT * FROM korisnik WHERE mejlAdresa = ? AND sifra = ?";
+	private $INSERT = "INSERT INTO korisnik (imePrezime, mejlAdresa, sifra, telefon, pol, interesovanje) VALUES (?, ?, ?, ?, ?, ?)";
+	private $KORISNIKPOSTOJI = "SELECT * FROM korisnik WHERE mejlAdresa = ?";
 
 	public function __construct()
 	{
@@ -26,7 +28,42 @@ class korisnikDAO {
 
 		else
 			return false;
-		
 	}
+
+	public function postojiKorisnik($mejlAdresa)
+	{
+		$statement = $this -> db -> prepare($this -> KORISNIKPOSTOJI);
+
+		$statement -> bindValue(1, $mejlAdresa);
+
+		$statement -> execute();
+
+		if($statement -> rowCount() > 0)
+			return true;
+
+		else
+			return false;
+	}
+
+	public function registracijaKorisnik($imePrezime, $mejlAdresa, $sifra, $telefon, $pol, $interesovanje)
+	{
+		$statement = $this -> db -> prepare($this -> INSERT);
+
+		$statement -> bindValue(1, $imePrezime);
+		$statement -> bindValue(2, $mejlAdresa);
+		$statement -> bindValue(3, $sifra);
+		$statement -> bindValue(4, $telefon);
+		$statement -> bindValue(5, $pol);
+		$statement -> bindValue(6, $interesovanje);
+
+		$statement -> execute();
+
+		if($statement -> rowCount() > 0)
+			return true;
+
+		else
+			return false;
+	}
+
 }
 ?>

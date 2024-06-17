@@ -19,6 +19,9 @@
                 case "odjavaKorisnik":
                     $cs -> odjavaKorisnik();
                     break;
+                case "korisnikRegistracija":
+                    include "../public/registracija.php";
+                    break;
             }
         break;
 
@@ -30,6 +33,9 @@
                     break;
                 case "korisnikPrijava":
                     $cs -> proveraKorisnik();
+                    break;
+                case "registracijaKorisnik":
+                    $cs -> registracijaKorisnik();
                     break;
             }
         break;

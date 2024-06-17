@@ -14,6 +14,10 @@
         <input type="submit" name="action" value="korisnikPrijava" style="margin-left: 5px;">
     </form>
 
+    <form method="GET">
+        <input type="submit" name="action" value="korisnikRegistracija" style="margin-left: 5px;">
+    </form>
+
     <?php echo $msg; ?>
     
 </body>
