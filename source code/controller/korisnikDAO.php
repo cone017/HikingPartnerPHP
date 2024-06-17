@@ -1,23 +1,23 @@
 <?php
 require_once '../config/db.php';
 
-class adminDAO {
+class korisnikDAO {
 	private $db;
 
 	// za 2. nacin resenja
-	private $LOGIN = "SELECT * FROM admini WHERE korisnickoIme = ? AND lozinka = ?";
+	private $LOGIN = "SELECT * FROM korisnik WHERE mejlAdresa = ? AND sifra = ?";
 
 	public function __construct()
 	{
 		$this->db = DB::createInstance();
 	}
 
-	public function proveraAdmin($korisnickoIme, $lozinka)
+	public function proveraKorisnik($mejlAdresa, $sifra)
 	{
 		$statement = $this -> db -> prepare($this -> LOGIN);
 
-		$statement -> bindValue(1, $korisnickoIme);
-		$statement -> bindValue(2, $lozinka);
+		$statement -> bindValue(1, $mejlAdresa);
+		$statement -> bindValue(2, $sifra);
 
 		$statement -> execute();
 

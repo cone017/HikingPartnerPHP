@@ -1,7 +1,7 @@
 <?php
 
     $action = isset($_REQUEST["action"])?$_REQUEST["action"]:"";
-    require_once "adminController.php";
+    require_once "Controller.php";
 
     $cs = new adminController();
 
@@ -13,8 +13,11 @@
                 case "pocetna":
                     include "../public/pocetna.php";
                     break;
-                case "adminOdjava":
-                    $cs -> adminOdjava();
+                case "odjavaAdmin":
+                    $cs -> odjavaAdmin();
+                    break;
+                case "odjavaKorisnik":
+                    $cs -> odjavaKorisnik();
                     break;
             }
         break;
@@ -24,6 +27,9 @@
             {
                 case "adminPrijava":
                     $cs -> proveraAdmin();
+                    break;
+                case "korisnikPrijava":
+                    $cs -> proveraKorisnik();
                     break;
             }
         break;

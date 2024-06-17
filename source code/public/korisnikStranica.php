@@ -7,14 +7,14 @@
 </head>
 <body>
     <form method="GET">
-        Odjavi se <input type="submit" name="action" value="odjavaAdmin">
+        Odjavi se <input type="submit" name="action" value="odjavaKorisnik">
     </form>
 </body>
 </html>
 
 <?php
 
-echo "<h1>OVDE SU ADMINI</h1>";
-echo "Prijavljen admin:".$_SESSION["adminIme"];
+echo "<h1>OVDE SU KORISNICI</h1>";
+echo "Prijavljen korisnik:".$_SESSION["mejlAdresa"];
 
 ?>
