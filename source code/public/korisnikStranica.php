@@ -7,7 +7,7 @@
 </head>
 <body>
     <form method="GET">
-        Odjavi se <input type="submit" name="action" value="odjavaKorisnik">
+        <input type="submit" name="action" value="odjavaKorisnik">
     </form>
 
     <table border="1">
@@ -51,12 +51,15 @@
         </tr>
     </table>
 
+    <form method="GET">
+        <input type="submit" name="action" value="kreirajAktivnost">
+    </form>
+
 </body>
 </html>
 
 <?php
 
-echo "<h1>OVDE SU KORISNICI</h1>";
 echo "Prijavljen korisnik:".$_SESSION["mejlAdresa"];
 
 ?>

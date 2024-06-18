@@ -119,7 +119,40 @@
             $msg = "Morate popuniti sva polja";
             include "../public/registracija.php";
         }
+    }
 
+    function kreirajAktivnost()
+    {
+        $nazivAktivnosti = isset($_POST["nazivAktivnosti"])?$_POST["nazivAktivnosti"]:"";
+        $datumPocetka = isset($_POST["datumPocetka"])?$_POST["datumPocetka"]:"";
+        $trajanje = isset($_POST["trajanje"])?$_POST["trajanje"]:"";
+        $opis = isset($_POST["opis"])?$_POST["opis"]:"";
+        $lokacija = isset($_POST["lokacija"])?$_POST["lokacija"]:"";
+        $tipAktivnosti = isset($_POST["tipAktivnosti"])?$_POST["tipAktivnosti"]:"";
+
+        if(!empty($nazivAktivnosti)&&!empty($datumPocetka)&&!empty($trajanje)&&!empty($opis)&&!empty($lokacija)&&!empty($tipAktivnosti))
+        {
+            $dao = new aktivnostDAO();
+
+            if($dao -> insertAktivnost($nazivAktivnosti, $datumPocetka, $trajanje, $opis, $lokacija, $tipAktivnosti, 7))
+            {
+                $msg = "Uspesno ste dodali aktivnost";
+                $_SESSION["aktivnosti"] = $dao -> getAll();
+                include "../public/kreiranjeAktivnostiStranica.php";
+            }
+
+            else
+            {
+                $msg = "Nije uspelo kreiranje aktivnosti";
+                include "../public/kreiranjeAktivnostiStranica.php";
+            }
+        }
+
+        else
+        {
+            $msg = "Morate popuniti sva polja";
+            include "../public/kreiranjeAktivnostiStranica.php";
+        }
     }
 
     function odjavaAdmin()

@@ -22,6 +22,12 @@
                 case "korisnikRegistracija":
                     include "../public/registracija.php";
                     break;
+                case "kreirajAktivnost":
+                    include "../public/kreiranjeAktivnostiStranica.php";
+                    break;
+                case "odustanakAktivnost":
+                    include "../public/korisnikStranica.php";
+                    break;
             }
         break;
 
@@ -40,6 +46,9 @@
                     break;
                 case "brisanje":
                     $cs -> deleteKorisnikById();
+                    break;
+                case "kreiranjeAktivnosti":
+                    $cs -> kreirajAktivnost();
                     break;
             }
         break;
