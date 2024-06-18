@@ -2,16 +2,32 @@
 require_once '../config/db.php';
 
 class korisnikDAO {
+
 	private $db;
 
-	// za 2. nacin resenja
 	private $LOGIN = "SELECT * FROM korisnik WHERE mejlAdresa = ? AND sifra = ?";
 	private $INSERT = "INSERT INTO korisnik (imePrezime, mejlAdresa, sifra, telefon, pol, interesovanje) VALUES (?, ?, ?, ?, ?, ?)";
 	private $KORISNIKPOSTOJI = "SELECT * FROM korisnik WHERE mejlAdresa = ?";
+	private $GETALL = "SELECT * FROM korisnik";
+	private $GETKORISNIKBYID = "SELECT * FROM korisnik WHERE korisnikId = ?";
+	private $DELETEKORISNIKBYID = "DELETE FROM korisnik WHERE korisnikId = ?";
 
 	public function __construct()
 	{
 		$this->db = DB::createInstance();
+	}
+
+	public function getAll()
+	{
+		$statement = $this -> db -> prepare($this -> GETALL);
+
+		$statement -> execute();
+
+		if($statement -> rowCount() > 0)
+			return $statement -> fetchAll();
+
+		else
+			return false;
 	}
 
 	public function proveraKorisnik($mejlAdresa, $sifra)
@@ -65,5 +81,30 @@ class korisnikDAO {
 			return false;
 	}
 
+	public function getKorisnikById($id)
+	{
+		$statement = $this -> db -> prepare($this -> GETKORISNIKBYID);
+
+		$statement -> bindValue(1, $id);
+
+		$statement -> execute();
+
+		return $statement -> fetch();
+	}
+
+	public function deleteKorisnikById($id)
+	{
+		$statement = $this -> db -> prepare($this -> DELETEKORISNIKBYID);
+
+		$statement -> bindValue(1, $id);
+
+		$statement -> execute();
+
+		if($statement -> rowCount() > 0)
+			return true;
+	
+		else
+			return false;
+	}
 }
 ?>

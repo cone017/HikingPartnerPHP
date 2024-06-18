@@ -9,6 +9,48 @@
     <form method="GET">
         Odjavi se <input type="submit" name="action" value="odjavaKorisnik">
     </form>
+
+    <table border="1">
+        <tr>
+            <th>
+                Aktivnost id
+            </th>
+            <th>
+                Naziv aktivnosti
+            </th>
+            <th>
+                Datum pocetka
+            </th>
+            <th>
+                Trajanje
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Lokacija
+            </th>
+            <th>
+                Tip aktivnosti
+            </th>
+            <th>
+                Korisnik
+            </th>
+        </tr>
+        <?php foreach($_SESSION["aktivnosti"] as $aktivnost) { ?>
+        <tr>
+            <td><?= $aktivnost["aktivnostId"]?></td>
+            <td><?= $aktivnost["nazivAktivnosti"]?></td>
+            <td><?= $aktivnost["datumPocetka"]?></td>
+            <td><?= $aktivnost["trajanje"]?></td>
+            <td><?= $aktivnost["opis"]?></td>
+            <td><?= $aktivnost["lokacija"]?></td>
+            <td><?= $aktivnost["tipAktivnostiId"]?></td>
+            <td><?= $aktivnost["korisnikId"]?></td>
+        <?php } ?>
+        </tr>
+    </table>
+
 </body>
 </html>
 

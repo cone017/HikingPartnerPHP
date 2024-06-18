@@ -1,33 +1,50 @@
 <?php
 
-    require_once "adminDAO.php";
     require_once "korisnikDAO.php";
+    require_once "aktivnostDAO.php";
     session_start();
 
     class adminController
     {
-        
-    function proveraAdmin()
+
+    function proveraKorisnik()
     {
-        $korisnickoIme = isset($_POST["korisnickoIme"])?$_POST["korisnickoIme"]:"";
-        $lozinka = isset($_POST["lozinka"])?$_POST["lozinka"]:"";
+        $mejlAdresa = isset($_POST["korisnickoIme"])?$_POST["korisnickoIme"]:"";
+        $sifra = isset($_POST["lozinka"])?$_POST["lozinka"]:"";
 
-        if(!empty($korisnickoIme)&&!empty($korisnickoIme))
+        $aktivnost = new aktivnostDAO();
+
+        if(!empty($mejlAdresa)&&!empty($sifra))
         {
-            $dao = new adminDAO();
 
-            $postoji = $dao -> proveraAdmin($korisnickoIme, $lozinka);
-
-            if($postoji)
+            if($mejlAdresa == "admin" && $sifra == "admin")
             {
-                $_SESSION["adminIme"] = $korisnickoIme;
+                
+                $korisnik = new korisnikDAO();
+
+                $_SESSION["aktivnosti"] = $aktivnost -> getAll();
+                $_SESSION["korisnici"] = $korisnik -> getAll();
+
                 include "../public/adminStranica.php";
             }
-
             else
             {
-               $msg = "Neuspesno prijavljivanje";
-                include "../public/pocetna.php";
+                $dao = new korisnikDAO();
+
+                $postoji = $dao -> proveraKorisnik($mejlAdresa, $sifra);
+
+                if($postoji)
+                {
+                    $_SESSION["mejlAdresa"] = $mejlAdresa;
+                    $_SESSION["aktivnosti"] = $aktivnost -> getAll();
+                    include "../public/korisnikStranica.php";
+                }
+
+                else
+                {
+                    $msg = "Neuspesno prijavljivanje";
+                    include "../public/pocetna.php";
+                }
             }
         }
 
@@ -38,34 +55,36 @@
         }
     }
 
-    function proveraKorisnik()
+    function getKorisnikById()
     {
-        $mejlAdresa = isset($_POST["korisnickoIme"])?$_POST["korisnickoIme"]:"";
-        $sifra = isset($_POST["lozinka"])?$_POST["lozinka"]:"";
+        $id = isset($_POST["korisnikId"])?$_POST["korisnikId"]:"";
 
-        if(!empty($mejlAdresa)&&!empty($sifra))
+        $korisnik = new korisnikDAO();
+
+        $_SESSION["korisnik"] = $korisnik -> getKorisnikById($id);
+    }
+
+    function deleteKorisnikById()
+    {
+        $id = isset($_POST["korisnikId"])?$_POST["korisnikId"]:"";
+
+        $korisnik = new korisnikDAO();
+        $aktivnost = new aktivnostDAO();
+
+        $obrisan = $korisnik -> deleteKorisnikById($id);
+
+        if($obrisan)
         {
-            $dao = new korisnikDAO();
-
-            $postoji = $dao -> proveraKorisnik($mejlAdresa, $sifra);
-
-            if($postoji)
-            {
-                $_SESSION["mejlAdresa"] = $mejlAdresa;
-                include "../public/korisnikStranica.php";
-            }
-
-            else
-            {
-               $msg = "Neuspesno prijavljivanje";
-                include "../public/pocetna.php";
-            }
+            $msg = "Uspesno obrisan korisnik";
+            $_SESSION["korisnici"] = $korisnik -> getAll();
+            $_SESSION["aktivnosti"] = $aktivnost -> getAll();
+            include "../public/adminStranica.php";
         }
 
         else
         {
-            $msg = "Morate popuniti korisnicko ime i lozinku";
-            include "../public/pocetna.php";
+            $msg = "Brisanje nije uspelo";
+            include "../public/adminStranica.php";
         }
     }
 
@@ -105,12 +124,9 @@
 
     function odjavaAdmin()
     {
-        if($_SESSION["adminIme"] != "")
-        {
             session_unset();
             session_destroy();
             include "../public/pocetna.php";
-        }
     }
 
     function odjavaKorisnik()

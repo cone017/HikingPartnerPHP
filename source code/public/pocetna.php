@@ -10,7 +10,6 @@
     <form method="POST">
         Korisnicko ime/Email adresa<input type="text" name="korisnickoIme"><br>
         Lozinka<input type="text" name="lozinka"><br>
-        <input type="submit" name="action" value="adminPrijava">
         <input type="submit" name="action" value="korisnikPrijava" style="margin-left: 5px;">
     </form>
 
