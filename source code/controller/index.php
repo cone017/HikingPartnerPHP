@@ -35,6 +35,9 @@
                 case "glavna":
                     include "../public/glavnaStranica.php";
                     break;
+                case "detaljnije":
+                    $cs -> detaljnije();
+                    break;
             }
         break;
 
@@ -56,6 +59,8 @@
                 case "izmeni":
                     $cs -> updateKorisnik();
                     break;
+                case "pridruziSe":
+                    $cs -> pridruziSe();
             }
         break;
     }

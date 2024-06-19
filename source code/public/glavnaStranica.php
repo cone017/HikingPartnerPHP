@@ -37,6 +37,9 @@
             <th>
                 Korisnik
             </th>
+            <th>
+                Detaljnije
+            </th>
         </tr>
         <?php foreach($_SESSION["aktivnosti"] as $aktivnost) { ?>
         <tr>
@@ -48,6 +51,12 @@
             <td><?= $aktivnost["lokacija"]?></td>
             <td><?= $aktivnost["tipAktivnostiId"]?></td>
             <td><?= $aktivnost["korisnikId"]?></td>
+            <td>
+                <form method="GET">
+                    <input type="hidden" name="aktivnostId" value="<?= $aktivnost["aktivnostId"]?>">
+                    <input type="submit" name="action" value="detaljnije">
+                </form>
+            </td>
         <?php } ?>
         </tr>
     </table>

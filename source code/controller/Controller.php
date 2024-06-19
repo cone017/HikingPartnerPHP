@@ -204,6 +204,51 @@
         }
     }
 
+    function detaljnije()
+    {
+        $dao = new clanoviAktivnostDAO();
+
+        $id = isset($_GET["aktivnostId"])?$_GET["aktivnostId"]:"";
+        $_SESSION["aktivnostId"] = $id;
+        $_SESSION["clanovi"] = $dao -> getClanovi($id);
+        include "../public/detaljnije.php";
+    }
+
+    function pridruziSe()
+    {
+        $dao = new clanoviAktivnostDAO();
+
+        $postoji = $dao -> korisnikPostoji($_SESSION["korisnikId"], $_SESSION["aktivnostId"]);
+
+        if($postoji)
+        {
+            $msg = "Vec ste clan ove aktivnosti";
+            include "../public/detaljnije.php";
+        }
+
+        else
+        {
+            $aktivnostDAO = new aktivnostDAO();
+
+            $aktivnost = $aktivnostDAO -> getAktivnostById($_SESSION["aktivnostId"]);
+
+            if($dao -> insertClanoviAktivnost($_SESSION["korisnikId"], $_SESSION["aktivnostId"], $aktivnost["nazivAktivnosti"], $_SESSION["korisnik"]["imePrezime"]))
+            {
+                $msg = "Uspesno ste se prijavili na ovu aktivnost";
+                $_SESSION["clanovi"] = $dao -> getClanovi($aktivnost["aktivnostId"]);
+                include "../public/detaljnije.php";
+            }
+
+            else
+            {
+                $msg = "Greska pri prijavi na ovu aktivnost";
+                include "../public/detaljnije.php";
+            }
+        }
+
+
+    }
+
     function odjavaAdmin()
     {
             session_unset();
