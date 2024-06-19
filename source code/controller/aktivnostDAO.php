@@ -7,6 +7,7 @@ class aktivnostDAO {
 
 	private $GETALL = "SELECT * FROM aktivnosti";
 	private $INSERT = "INSERT INTO aktivnosti (nazivAktivnosti, datumPocetka, trajanje, opis, lokacija, tipAktivnostiId, korisnikId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	private $GETAKTIVNOSTID = "SELECT aktivnostId FROM aktivnosti WHERE datumPocetka = ? AND trajanje = ?";
 
 	public function __construct()
 	{
@@ -43,6 +44,25 @@ class aktivnostDAO {
 		if($statement -> rowCount() > 0)
 			return true;
 		
+		else
+			return false;
+	}
+
+	public function getAktivnostId($datumPocetka, $trajanje)
+	{
+		$statement = $this -> db -> prepare($this -> GETAKTIVNOSTID);
+
+		$statement -> bindValue(1, $datumPocetka);
+		$statement -> bindValue(2, $trajanje);
+
+		$statement -> execute();
+
+		if($statement -> rowCount() > 0)
+		{
+			$row = $statement->fetch();
+        	return $row["aktivnostId"];
+		}
+
 		else
 			return false;
 	}

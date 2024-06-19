@@ -2,6 +2,8 @@
 
     require_once "korisnikDAO.php";
     require_once "aktivnostDAO.php";
+    require_once "clanoviAktivnostDAO.php";
+
     session_start();
 
     class adminController
@@ -176,9 +178,16 @@
 
             if($dao -> insertAktivnost($nazivAktivnosti, $datumPocetka, $trajanje, $opis, $lokacija, $tipAktivnosti, $_SESSION["korisnikId"]))
             {
-                $msg = "Uspesno ste dodali aktivnost";
-                $_SESSION["aktivnosti"] = $dao -> getAll();
-                include "../public/kreiranjeAktivnostiStranica.php";
+                $daoClanovi = new clanoviAktivnostDAO();
+
+                $idAktivnosti = $dao -> getAktivnostId($datumPocetka, $trajanje);
+
+                if($daoClanovi -> insertClanoviAktivnost($_SESSION["korisnikId"], $idAktivnosti, $nazivAktivnosti, $_SESSION["korisnik"]["imePrezime"]))
+                {
+                    $msg = "Uspesno ste dodali aktivnost";
+                    $_SESSION["aktivnosti"] = $dao -> getAll();
+                    include "../public/kreiranjeAktivnostiStranica.php";
+                } 
             }
 
             else
