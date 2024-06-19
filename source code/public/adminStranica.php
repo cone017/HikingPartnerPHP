@@ -80,9 +80,6 @@
                 Interesovanje
             </th>
             <th>
-                Izmena
-            </th>
-            <th>
                 Brisanje
             </th>
         </tr>
@@ -97,20 +94,19 @@
             <td><?= $korisnik["pol"]?></td>
             <td><?= $korisnik["interesovanje"]?></td>
             <td>
+                <input type="submit" name="action" value="brisanje">    
                 <input type="hidden" name="korisnikId" value="<?= $korisnik["korisnikId"] ?>">
-                <input type="submit" name="action" value="izmena">
-            </td>
-            <td>
-                <input type="submit" name="action" value="brisanje">
             </td>
             </form>
         <?php } ?>
         </tr>
     </table>
 
-    <?php
-        echo $msg;
-    ?>
+
+    
+    <!-- <?php
+        var_dump($_SESSION["korisnik"]);
+    ?> -->
 <br><br><br>
 </body>
 </html>

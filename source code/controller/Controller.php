@@ -33,11 +33,15 @@
 
                 $postoji = $dao -> proveraKorisnik($mejlAdresa, $sifra);
 
+                $id = $dao -> getKorisnikIdByEmail($mejlAdresa);
+
                 if($postoji)
                 {
                     $_SESSION["mejlAdresa"] = $mejlAdresa;
                     $_SESSION["aktivnosti"] = $aktivnost -> getAll();
-                    include "../public/korisnikStranica.php";
+                    $_SESSION["korisnikId"] = $id;
+                    $_SESSION["korisnik"] = $dao -> getKorisnikById(7);
+                    include "../public/glavnaStranica.php";
                 }
 
                 else
@@ -57,11 +61,8 @@
 
     function getKorisnikById()
     {
-        $id = isset($_POST["korisnikId"])?$_POST["korisnikId"]:"";
-
         $korisnik = new korisnikDAO();
-
-        $_SESSION["korisnik"] = $korisnik -> getKorisnikById($id);
+        $_SESSION["korisnik"] = $korisnik -> getKorisnikById($_SESSION["korisnikId"]);
     }
 
     function deleteKorisnikById()
@@ -85,6 +86,45 @@
         {
             $msg = "Brisanje nije uspelo";
             include "../public/adminStranica.php";
+        }
+    }
+
+    function updateKorisnik()
+    {
+        $imePrezime = isset($_POST["imePrezimeUpdate"])?$_POST["imePrezimeUpdate"]:"";
+        $mejl = isset($_POST["mejlAdresaUpdate"])?$_POST["mejlAdresaUpdate"]:"";
+        $sifra = isset($_POST["sifraUpdate"])?$_POST["sifraUpdate"]:"";
+        $telefon = isset($_POST["telefonUpdate"])?$_POST["telefonUpdate"]:"";
+        $pol = isset($_POST["polUpdate"])?$_POST["polUpdate"]:"";
+        $interesovanje = isset($_POST["interesovanjeUpdate"])?$_POST["interesovanjeUpdate"]:"";
+        $id = isset($_SESSION["korisnik"]["korisnikId"])?$_SESSION["korisnik"]["korisnikId"]:"";
+
+        if(!empty($imePrezime)&&!empty($mejl)&&!empty($sifra)&&!empty($telefon)&&!empty($pol)&&!empty($interesovanje))
+        {   
+            $dao = new korisnikDAO();
+
+            $izmenjen = $dao -> updateKorisnik($imePrezime, $mejl, $sifra, $telefon, $pol, $interesovanje, $id); 
+
+            if($izmenjen)
+            {
+                $_SESSION["korisnik"] = $dao -> getKorisnikById($_SESSION["korisnikId"]);
+                $msg = "Uspesno izmenjen korisnik ".$izmenjen;
+                include "../public/korisnikStranica.php";
+            }
+
+            else
+            {
+                $_SESSION["korisnik"] = $dao -> getKorisnikById($_SESSION["korisnikId"]);
+                $msg = "Nije uspelo update-ovanje korisnika ".$izmenjen." nesto";
+                include "../public/korisnikStranica.php";
+            }
+              
+        }
+
+        else
+        {    
+            $msg = "Morate popuniti sva polja";
+            include "../public/korisnikStranica.php";
         }
     }
 
@@ -134,7 +174,7 @@
         {
             $dao = new aktivnostDAO();
 
-            if($dao -> insertAktivnost($nazivAktivnosti, $datumPocetka, $trajanje, $opis, $lokacija, $tipAktivnosti, 7))
+            if($dao -> insertAktivnost($nazivAktivnosti, $datumPocetka, $trajanje, $opis, $lokacija, $tipAktivnosti, $_SESSION["korisnikId"]))
             {
                 $msg = "Uspesno ste dodali aktivnost";
                 $_SESSION["aktivnosti"] = $dao -> getAll();
