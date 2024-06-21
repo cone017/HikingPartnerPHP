@@ -15,6 +15,7 @@
 
     <form method="GET">
         <input type="submit" name="action" value="korisnikRegistracija" style="margin-left: 5px;">
+        <input type="submit" name="action" value="gostPrijava" style="margin-left: 5px;">
     </form>
 
     <?php echo $msg; ?>

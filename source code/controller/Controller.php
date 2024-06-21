@@ -209,6 +209,7 @@
         $dao = new clanoviAktivnostDAO();
 
         $id = isset($_GET["aktivnostId"])?$_GET["aktivnostId"]:"";
+        setcookie("poslednja", $id, time() + 50, "/",);
         $_SESSION["aktivnostId"] = $id;
         $_SESSION["clanovi"] = $dao -> getClanovi($id);
         include "../public/detaljnije.php";
@@ -265,9 +266,17 @@
 
         else
         {
-            $msg = "korisnik nije clan nijedne aktivnosti";
+            $msg = "nema";
             include "../public/glavnaStranica.php";
         }
+    }
+
+    function gostPrijava()
+    {
+        $aktivnost = new aktivnostDAO();
+
+        $_SESSION["aktivnosti"] = $aktivnost -> getAll();
+        include "../public/glavnaStranica.php";
     }
 
     function odjavaAdmin()

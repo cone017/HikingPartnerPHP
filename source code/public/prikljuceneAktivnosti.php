@@ -2,8 +2,10 @@
 
 $msg = isset($msg)?$msg:"";
 
-echo $msg."<br>";
+if($msg == "korisnik je clan neke aktivnosti")
+    var_dump($_SESSION["prikljuceneAktivnosti"]);
 
-var_dump($_SESSION["prikljuceneAktivnosti"]);
+else
+    echo "Korisnik nije clan nijedne aktivnosti";
 
 ?>

@@ -41,6 +41,9 @@
                 case "prikljuceneAktivnosti":
                     $cs -> prikljuceneAktivnosti();
                     break;
+                case "gostPrijava":
+                    $cs -> gostPrijava();
+                    break;
             }
         break;
 
