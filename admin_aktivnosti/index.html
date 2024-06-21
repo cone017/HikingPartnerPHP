@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabele u Admin dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-logo">
+        <p class="logopara">hp team™</p>
+      </div>
+      <div class="nav-menu">
+        <ul>
+          <li><a href="#" class="link" onclick="home()">Početna</a></li>
+          <li><a href="#" class="link">O nama</a></li>
+          <li></li>
+          <li><a href="#" class="link-add logout">Odjava</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="table-wrapper">
+      <!-- PRVA TABELA -->
+      <main class="table">
+        <section class="table_header">
+          <h1 class="first_heading">Dostupne aktivnosti</h1>
+        </section>
+        <section class="table_body">
+          <table>
+            <thead>
+              <tr>
+                <th>Aktivnost ID</th>
+                <th>Naziv aktivnosti</th>
+                <th>Datum početka</th>
+                <th>Trajanje (h)</th>
+                <th>Opis</th>
+                <th>Lokacija</th>
+                <th>Tip aktivnosti</th>
+                <th>Korisnik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Prva aktivnost -->
+              <tr>
+                <td>1</td>
+                <td>Atletska staza Čačak</td>
+                <td>2024-06-21</td>
+                <td>03:55</td>
+                <td>Grupni trening</td>
+                <td>Čačak</td>
+                <td>2</td>
+                <td>7</td>
+              </tr>
+              <!-- Druga -->
+              <tr>
+                <td>2</td>
+                <td>Uspon na Kablar</td>
+                <td>2024-06-27</td>
+                <td>06:00</td>
+                <td>Amaterski uspon</td>
+                <td>Čačak</td>
+                <td>1</td>
+                <td>7</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <!-- Ovo moze biti partial -->
+    <div class="footer-wrapper">
+      <footer class="new">
+        <p><i>Copyright © HP Team 2024.</i></p>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

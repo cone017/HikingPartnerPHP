@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabele u Admin dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-logo">
+        <p class="logopara">hp team™</p>
+      </div>
+      <div class="nav-menu">
+        <ul>
+          <li><a href="#" class="link" onclick="home()">Početna</a></li>
+          <li><a href="#" class="link">O nama</a></li>
+          <li>
+            <a href="#" class="link-add-activity" onclick="admin_aktivnosti()">Dostupne aktivnosti</a>
+          </li>
+          <li><a href="#" class="link-add logout">Odjava</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="table-wrapper">
+      <!-- PRVA TABELA -->
+      <main class="table">
+        <section class="table_header">
+          <h1 class="first_heading">Upravljanje korisnicima</h1>
+        </section>
+        <section class="table_body">
+          <table>
+            <thead>
+              <tr>
+                <th>Korisnik ID</th>
+                <th>Korisnik</th>
+                <th>Email adresa</th>
+                <th>Šifra</th>
+                <th>Telefon</th>
+                <th>Pol</th>
+                <th>Interesovanje</th>
+                <th>Akcija</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Prvi korisnik -->
+              <tr>
+                <td>1</td>
+                <td><img src="../images/man.jpg" alt="manimg" />Pera Peric</td>
+                <td>pera@gmail.com</td>
+                <td>123456789</td>
+                <td>065-211-42-21</td>
+                <td>muški</td>
+                <td><p class="interesovanje bicikl">Biciklizam</p></td>
+                <td><button class="btn">Ukloni</button></td>
+              </tr>
+              <!-- Drugi korisnik -->
+              <tr>
+                <td>2</td>
+                <td><img src="../images/man.jpg" alt="manimg" />Pera Peric</td>
+                <td>pera@gmail.com</td>
+                <td>123456789</td>
+                <td>065-211-42-21</td>
+                <td>muški</td>
+                <td><p class="interesovanje planina">Planinarenje</p></td>
+                <td><button class="btn">Ukloni</button></td>
+              </tr>
+              <!-- Treci korisnik -->
+              <tr>
+                <td>3</td>
+                <td><img src="../images/man.jpg" alt="manimg" />Pera Peric</td>
+                <td>pera@gmail.com</td>
+                <td>123456789</td>
+                <td>065-211-42-21</td>
+                <td>muški</td>
+                <td><p class="interesovanje trcanje">Trčanje</p></td>
+                <td><button class="btn">Ukloni</button></td>
+              </tr>
+              <!-- Cetvrti korisnik -->
+              <tr>
+                <td>4</td>
+                <td><img src="../images/man.jpg" alt="manimg" />Pera Peric</td>
+                <td>pera@gmail.com</td>
+                <td>123456789</td>
+                <td>065-211-42-21</td>
+                <td>muški</td>
+                <td><p class="interesovanje trcanje">Trčanje</p></td>
+                <td><button class="btn">Ukloni</button></td>
+              </tr>
+              <!-- Peti korisnik -->
+              <tr>
+                <td>5</td>
+                <td><img src="../images/man.jpg" alt="manimg" />Pera Peric</td>
+                <td>pera@gmail.com</td>
+                <td>123456789</td>
+                <td>065-211-42-21</td>
+                <td>muški</td>
+                <td><p class="interesovanje trcanje">Trčanje</p></td>
+                <td><button class="btn">Ukloni</button></td>
+              </tr>
+              <!-- Sesti korisnik -->
+              <tr>
+                <td>6</td>
+                <td><img src="../images/man.jpg" alt="manimg" />Pera Peric</td>
+                <td>pera@gmail.com</td>
+                <td>123456789</td>
+                <td>065-211-42-21</td>
+                <td>muški</td>
+                <td><p class="interesovanje planina">Planinarenje</p></td>
+                <td><button class="btn">Ukloni</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+
+      <!-- Dodaj drugu tabelu -->
+    </div>
+    <!-- Ovo moze biti partial -->
+    <div class="footer-wrapper">
+      <footer class="new">
+        <p><i>Copyright © HP Team 2024.</i></p>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

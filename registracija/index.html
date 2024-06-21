@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="div-wrapper">
+      <nav class="nav">
+        <div class="nav-logo">
+          <p class="logopara">hp team™</p>
+        </div>
+        <div class="nav-menu">
+          <ul>
+            <li><a href="#" class="link" onclick="homepage()"> Početna</a></li>
+            <li><a href="#" class="link">O nama</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Forma -->
+      <div class="form-box">
+        <!-- Forma za registraciju -->
+        <div class="register-container">
+          <div class="top">
+            <span
+              >Imate već nalog?
+              <a href="#" onclick="login()">Prijavi se!</a></span
+            >
+            <header>Registracija</header>
+          </div>
+
+          <form action="" id="registrationForm" class="two-forms">
+            <div class="input-box">
+              <input
+                type="text"
+                class="input-field"
+                name="ime_prezime"
+                id="ime_prezime"
+                placeholder="Uneti ime i prezime"
+              />
+              <i class="bx bx-user"></i>
+            </div>
+            <div class="input-box">
+              <input
+                type="email"
+                class="input-field"
+                name="email"
+                id="email"
+                placeholder="Uneti email adresu"
+              />
+              <i class="bx bx-envelope"></i>
+            </div>
+            <div class="input-box">
+              <input
+                type="text"
+                class="input-field"
+                name="broj_telefona"
+                id="broj_telefona"
+                placeholder="Uneti broj telefona"
+              />
+              <i class="bx bx-phone"></i>
+            </div>
+            <!-- <form action="" method="post" id="myFormGender"></form> -->
+            <div class="input-box">
+              <label for="" class="labelfirstgender">Pol:</label>
+              <label for="option1" class="labelgender">muški</label>
+              <input
+                type="radio"
+                id="option1"
+                name="group1"
+                class="input-field-radio"
+              />
+              <label for="option2" class="labelgender">ženski</label>
+              <input
+                type="radio"
+                id="option2"
+                name="group1"
+                class="input-field-radio"
+              />
+            </div>
+            <ul id="radioErrors"></ul>
+            <div class="input-box">
+              <label for="" class="labelfirstgender">Omiljena aktivnost:</label>
+              <label for="option1" class="labelactivity">Planinarenje</label>
+              <input
+                type="radio"
+                id="option1"
+                class="input-field-radio"
+                name="group2"
+              />
+              <label for="option2" class="labelactivity">Biciklizam</label>
+              <input
+                type="radio"
+                id="option2"
+                class="input-field-radio"
+                name="group2"
+              />
+              <label for="option3" class="labelactivity">Trčanje</label>
+              <input
+                type="radio"
+                id="option3"
+                class="input-field-radio"
+                name="group2"
+              />
+            </div>
+            <div class="input-box">
+              <input
+                type="password"
+                id="password"
+                class="input-field"
+                name="password"
+                placeholder="Uneti lozinku"
+              />
+              <i class="bx bx-lock-alt"></i>
+            </div>
+            <div class="input-box">
+              <input type="submit" class="submit" value="Registruj se" />
+            </div>
+            <div class="two-col"></div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-wrapper">
+        <footer class="new">
+          <p><i>Copyright © HP Team 2024.</i></p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
