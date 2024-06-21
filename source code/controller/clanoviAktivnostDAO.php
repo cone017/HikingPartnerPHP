@@ -8,6 +8,7 @@ class clanoviAktivnostDAO {
 	private $INSERT = "INSERT INTO clanoviaktivnosti (korisnikId, aktivnostId, naziv, pridruzeniClan) VALUES (?, ?, ?, ?)";
 	private $GETCLANOVIBYAKTIVNOSTID = "SELECT pridruzeniClan FROM clanoviaktivnosti WHERE aktivnostId = ?";
 	private $KORISNIKPOSTOJI = "SELECT * FROM clanoviaktivnosti WHERE korisnikId = ? AND aktivnostId = ?";
+	private $PRIKLJUCENEAKTIVNOSTI = "SELECT aktivnostId FROM clanoviaktivnosti WHERE korisnikId = ?";
 
 	public function __construct()
 	{
@@ -58,6 +59,21 @@ class clanoviAktivnostDAO {
 
 		if($statement -> rowCount() > 0)
 			return true;
+
+		else
+			return false;
+	}
+
+	public function prikljuceneAktivnosti($korisnikId)
+	{
+		$statement = $this -> db -> prepare($this -> PRIKLJUCENEAKTIVNOSTI);
+
+		$statement -> bindValue(1, $korisnikId);	
+
+		$statement -> execute();
+
+		if($statement -> rowCount() > 0)
+			return $statement -> fetchAll();
 
 		else
 			return false;

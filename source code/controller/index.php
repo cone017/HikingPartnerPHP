@@ -38,6 +38,9 @@
                 case "detaljnije":
                     $cs -> detaljnije();
                     break;
+                case "prikljuceneAktivnosti":
+                    $cs -> prikljuceneAktivnosti();
+                    break;
             }
         break;
 

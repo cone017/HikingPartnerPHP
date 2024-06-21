@@ -9,6 +9,7 @@
     <form method="GET">
         <input type="submit" name="action" value="odjavaKorisnik">
         <input type="submit" name="action" value="podaciKorisnik">
+        <input type="submit" name="action" value="prikljuceneAktivnosti">
     </form>
 
     <table border="1">
@@ -69,4 +70,8 @@
 <?php
     echo "Prijavljen korisnik:".$_SESSION["mejlAdresa"]."<br>";
     echo "Id korisnika:".$_SESSION["korisnikId"];
+
+    $msg = isset($msg)?$msg:"";
+
+    echo $msg;
 ?>

@@ -232,7 +232,11 @@
 
             $aktivnost = $aktivnostDAO -> getAktivnostById($_SESSION["aktivnostId"]);
 
-            if($dao -> insertClanoviAktivnost($_SESSION["korisnikId"], $_SESSION["aktivnostId"], $aktivnost["nazivAktivnosti"], $_SESSION["korisnik"]["imePrezime"]))
+            $korisnikDAO = new korisnikDAO();
+
+            $ime = $korisnikDAO -> getKorisnikById($_SESSION["korisnikId"]);
+
+            if($dao -> insertClanoviAktivnost($_SESSION["korisnikId"], $_SESSION["aktivnostId"], $aktivnost["nazivAktivnosti"], $ime["imePrezime"]))
             {
                 $msg = "Uspesno ste se prijavili na ovu aktivnost";
                 $_SESSION["clanovi"] = $dao -> getClanovi($aktivnost["aktivnostId"]);
@@ -245,8 +249,25 @@
                 include "../public/detaljnije.php";
             }
         }
+    }
 
+    function prikljuceneAktivnosti()
+    {
+        $dao = new clanoviAktivnostDAO();
 
+        $_SESSION["prikljuceneAktivnosti"] = $dao -> prikljuceneAktivnosti($_SESSION["korisnikId"]);
+
+        if(!empty($_SESSION["prikljuceneAktivnosti"]))
+        {
+            $msg = "korisnik je clan neke aktivnosti";
+            include "../public/prikljuceneAktivnosti.php";
+        }
+
+        else
+        {
+            $msg = "korisnik nije clan nijedne aktivnosti";
+            include "../public/glavnaStranica.php";
+        }
     }
 
     function odjavaAdmin()
