@@ -73,12 +73,19 @@
 </body>
 </html>
 <?php
+    require_once "../controller/aktivnostDAO.php";
+
     echo "Prijavljen korisnik:".$_SESSION["mejlAdresa"]."<br>";
     echo "Id korisnika:".$_SESSION["korisnikId"]."<br><br>";
 
     if(isset($_COOKIE["poslednja"]))
-        echo $_COOKIE["poslednja"];
+    {
+        $dao = new aktivnostDAO();
 
+        $aktivnost = $dao -> getAktivnostById($_COOKIE["poslednja"]);
+
+        echo "Poslednje pregledana aktivnost je: ".$aktivnost["nazivAktivnosti"];
+    }
 
     $msg = isset($msg)?$msg:"";
 
