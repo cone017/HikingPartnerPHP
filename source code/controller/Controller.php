@@ -271,6 +271,22 @@
         }
     }
 
+    function getAllPagination()
+    {
+        $dao = new aktivnostDAO();
+
+        if(isset($_GET["page-nr"]))
+        {
+            $page = $_GET["page-nr"] - 1;
+            $start = $page * 2;
+            $_SESSION["limit"] = $dao -> getAllPagination($start, 2);
+        }
+
+        else {
+            $_SESSION["limit"] = $dao->getAllPagination(0, 2);
+        }
+    }
+
     function gostPrijava()
     {
         $aktivnost = new aktivnostDAO();

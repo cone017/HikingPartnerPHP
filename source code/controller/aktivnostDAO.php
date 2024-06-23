@@ -9,6 +9,7 @@ class aktivnostDAO {
 	private $INSERT = "INSERT INTO aktivnosti (nazivAktivnosti, datumPocetka, trajanje, opis, lokacija, tipAktivnostiId, korisnikId) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private $GETAKTIVNOSTID = "SELECT aktivnostId FROM aktivnosti WHERE datumPocetka = ? AND trajanje = ?";
 	private $GETAKTIVNOSTBYID = "SELECT * FROM aktivnosti WHERE aktivnostId = ?";
+	private $GETALLPAGINATION = "SELECT  * FROM aktivnosti LIMIT :start, :end";
 
 	public function __construct()
 	{
@@ -78,6 +79,22 @@ class aktivnostDAO {
 
 		if($statement -> rowCount() > 0)
 			return $statement -> fetch();
+
+		else
+			return false;
+	}
+
+	public function getAllPagination($start, $end)
+	{
+		$statement = $this -> db -> prepare($this -> GETALLPAGINATION);
+
+		$statement -> bindValue(':start', (int)$start, PDO::PARAM_INT);
+		$statement -> bindValue(':end', (int)$end, PDO::PARAM_INT);
+
+		$statement -> execute();
+
+		if($statement -> rowCount() > 0)
+			return $statement -> fetchAll();
 
 		else
 			return false;

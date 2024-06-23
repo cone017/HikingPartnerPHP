@@ -44,6 +44,10 @@
                 case "gostPrijava":
                     $cs -> gostPrijava();
                     break;
+                case "page-nr":
+                    $cs->getAllPagination();
+                    include "../public/glavnaStranica.php";
+                    break;
             }
         break;
 
@@ -51,6 +55,7 @@
             switch($action)
             {
                 case "korisnikPrijava":
+                    $cs -> getAllPagination();
                     $cs -> proveraKorisnik();
                     break;
                 case "registracijaKorisnik":
