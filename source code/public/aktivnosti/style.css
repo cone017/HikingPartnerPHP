@@ -1,0 +1,352 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+body {
+  background-image: url("../images/prijavareg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  justify-content: center;
+  /* justify-content: space-around;
+  flex-wrap: wrap; */
+  width: 100%;
+}
+.card {
+  width: 325px;
+  margin: 10px;
+  height: 200px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  /* border: 3px solid rgba(94, 99, 66); */
+  border: 3px solid rgba(165, 42, 42, 0.7);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  padding: 16px;
+}
+
+.naziv {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: rgba(94, 99, 66);
+  font-weight: 800;
+  font-family: "Poppins", sans-serif;
+}
+.id {
+  color: rgba(255, 0, 0, 0.7);
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 15px;
+  margin-left: 15px;
+  margin-top: 5px;
+}
+.datum {
+  font-size: small;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: rgba(165, 42, 42);
+}
+
+.kategorija {
+  font-size: medium;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: green;
+  font-family: "Poppins", sans-serif;
+}
+.card-content .btn {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 17px;
+  padding: 8px 16px;
+  width: 100%;
+  background-color: rgba(165, 42, 42);
+  text-decoration: none;
+  border-radius: 10px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.card-content .btn:hover {
+  background-color: rgba(165, 42, 42, 0.9);
+  font-size: 18px;
+  font-weight: 700;
+  transition: 0.5s ease;
+  transform: translateY(-4px);
+}
+.wrapper-card {
+  width: 100%;
+}
+.div-wrapper {
+  display: flex;
+  justify-content: center;
+  /* padding-top: 200px; */
+  align-items: center;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sub-div {
+  display: block;
+}
+.nav {
+  position: fixed;
+  margin-top: 3px;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  border-radius: 30px;
+  height: 80px;
+  line-height: 100px;
+  background: linear-gradient(to top, #5e6342, rgba(94, 99, 66, 0.5));
+  z-index: 100;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav-logo p {
+  color: white;
+  font-size: 19px;
+  font-family: cursive;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  background-repeat: no-repeat;
+  padding-left: 24px;
+  background-image: url(../images/hiker.png);
+  background-position: left center;
+  background-size: 24px;
+}
+
+.prijavljeni {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-menu ul {
+  display: flex;
+}
+.nav-menu ul li {
+  list-style-type: none;
+  text-transform: uppercase;
+}
+.nav-menu ul li .link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 15px;
+  margin: 0 25px;
+}
+.link:hover {
+  border-bottom: 2px solid #fff;
+  transition: 0.3s ease;
+}
+.nav-button .btn {
+  width: 165px;
+  height: 40px;
+  font-weight: 500;
+  padding: 2px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: white;
+  background: rgba(139, 69, 19, 0.9);
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background-color 0.6s ease;
+}
+
+.nav-button .btn:hover {
+  background-color: rgba(139, 69, 19, 0.7);
+  transform: translateY(-2px);
+  font-size: 15px;
+}
+
+#loginBtn {
+  margin-right: 10px;
+  background-image: url(images/enter.png);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px;
+  padding-left: 25px;
+  padding-right: 20px;
+}
+#registerBtn {
+  background-image: url(images/add.png);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px;
+  padding-left: 25px;
+  padding-right: 20px;
+}
+.nav-menu .btn {
+  display: none;
+}
+/* Dizajn za footer partial */
+.footer-wrapper {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  border-radius: 10px;
+  margin-bottom: 3px;
+  height: 55px;
+  line-height: 80px;
+  background: linear-gradient(to top, #5e6342, rgba(94, 99, 66, 0.5));
+  z-index: 100;
+}
+.footer-wrapper .new {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 30px; /* Prilagodite vrednost prema potrebi */
+}
+.link-add.first {
+  color: #fff;
+  text-decoration: none;
+  background-color: rgba(165, 42, 42);
+  background-image: url(../images/addactivity.png);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px;
+  text-decoration: none;
+  border-radius: 10px;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.link-add.logout {
+  margin-left: 10px;
+  color: #fff;
+  text-decoration: none;
+  background-color: rgba(165, 42, 42);
+  background-image: url(../images/logout.png);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px;
+  text-decoration: none;
+  border-radius: 10px;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.link-add:hover {
+  background-color: rgba(165, 42, 42, 0.8);
+  color: #fff;
+  font-size: 17px;
+  transform: translateY(-2px);
+  transition: 0.3s ease;
+}
+.form-wrapper,
+.user-wrapper {
+  display: flex;
+  justify-content: right;
+  margin-top: 15px;
+  margin-right: 50px;
+  font-weight: 700;
+  flex-wrap: wrap;
+  color: white;
+}
+.user-wrapper {
+  margin-bottom: 5px;
+}
+
+.paginationnew {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-numbers,
+.input-omiljena {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-omiljena {
+  color: white;
+  justify-content: center;
+  align-items: end;
+  margin-top: 20px;
+}
+
+.page-numbers a {
+  color: white;
+  background-color: rgba(165, 42, 42);
+  padding: 10px;
+  margin: 5px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.page-numbers a:hover {
+  background-color: rgba(165, 42, 42, 0.7);
+  font-weight: 700;
+}
+
+.page-numbers a.active {
+  background-color: #007bff; /* Plava pozadina za aktivnu stranicu */
+  color: #fff; /* Bela boja teksta za aktivnu stranicu */
+}
+
+@media (max-width: 768) {
+  .nav-menu {
+    display: none;
+  }
+}
+@media (max-width: 868px) {
+  .nav-menu {
+    display: none;
+  }
+  .nav-menu ul {
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .nav-toggle {
+    display: block;
+    cursor: pointer;
+  }
+  .nav-logo p {
+    color: white;
+    font-size: 17px;
+    font-family: cursive;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    background-image: url(../images/hiker.png);
+    background-position: left center;
+    background-size: 23px;
+  }
+}

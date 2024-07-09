@@ -10,25 +10,31 @@
         case "GET":
             switch($action)
             {
+                case "home":
+                    include "../public/home.php";
+                    break;
                 case "pocetna":
                     include "../public/pocetna.php";
                     break;
-                case "odjavaAdmin":
+                case "Odjava admin":
                     $cs -> odjavaAdmin();
                     break;
-                case "odjavaKorisnik":
+                case "Aktivnosti":
+                    $cs -> dostupneAktivnosti();
+                    break;
+                case "Odjava korisnik":
                     $cs -> odjavaKorisnik();
                     break;
                 case "korisnikRegistracija":
                     include "../public/registracija.php";
                     break;
-                case "kreirajAktivnost":
+                case "Kreiraj aktivnost":
                     include "../public/kreiranjeAktivnostiStranica.php";
                     break;
-                case "odustanakAktivnost":
+                case "Odustani":
                     include "../public/glavnaStranica.php";
                     break;
-                case "podaciKorisnik":
+                case "Korisnik":
                     $cs -> getKorisnikById();
                     include "../public/korisnikStranica.php";
                     break;
@@ -42,37 +48,44 @@
                     $cs -> prikljuceneAktivnosti();
                     break;
                 case "gostPrijava":
-                    $cs -> gostPrijava();
+                    include "../public/gost.php";
+                    //$cs -> gostPrijava();
                     break;
                 case "page-nr":
                     $cs->getAllPagination();
                     include "../public/glavnaStranica.php";
                     break;
+                case "omiljena":
+                    $cs ->getInteresovanje();
+                    include "../public/filtriraneAktivnosti.php";
+                    break;
+                
             }
         break;
-
+ 
         case "POST":
-            switch($action)
-            {
-                case "korisnikPrijava":
-                    $cs -> getAllPagination();
-                    $cs -> proveraKorisnik();
+            switch ($action) {
+                case "registracija":
+                    $cs->registracijaKorisnik();
                     break;
-                case "registracijaKorisnik":
-                    $cs -> registracijaKorisnik();
+                case "Prijava":
+                    $cs->getAllPagination();
+                    $cs->proveraKorisnik();
                     break;
                 case "brisanje":
-                    $cs -> deleteKorisnikById();
+                    $cs->deleteKorisnikById();
                     break;
-                case "kreiranjeAktivnosti":
-                    $cs -> kreirajAktivnost();
+                case "Kreiraj aktivnost":
+                    $cs->kreirajAktivnost();
                     break;
                 case "izmeni":
-                    $cs -> updateKorisnik();
-                    break;
+                    $cs->updateKorisnik();
+                    break;  
                 case "pridruziSe":
-                    $cs -> pridruziSe();
+                    $cs->pridruziSe();
+                    break; 
             }
-        break;
-    }
+            break;
+        }
+        
 ?>

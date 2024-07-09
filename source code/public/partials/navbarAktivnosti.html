@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .nav {
+        position: fixed;
+        margin-top: 3px;
+        top: 0;
+        display: flex;
+        justify-content: space-around;
+        width: 90%;
+        border-radius: 30px;
+        height: 80px;
+        line-height: 100px;
+        background: linear-gradient(to top, #5e6342, rgba(94, 99, 66, 0.5));
+        z-index: 100;
+      }
+
+      .nav a {
+        text-decoration: none;
+      }
+
+      .nav-logo p {
+        color: white;
+        font-size: 19px;
+        font-family: cursive;
+        font-weight: 600;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        background-repeat: no-repeat;
+        padding-left: 24px;
+        background-image: url(../images/hiker.png);
+        background-position: left center;
+        background-size: 24px;
+      }
+
+      .prijavljeni {
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .nav-menu ul {
+        display: flex;
+      }
+      .nav-menu ul li {
+        list-style-type: none;
+        text-transform: uppercase;
+      }
+      .nav-menu ul li .link {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        font-size: 16px;
+        padding-bottom: 15px;
+        margin: 0 25px;
+      }
+      .link:hover {
+        border-bottom: 2px solid #fff;
+        transition: 0.3s ease;
+      }
+      .nav-button .btn {
+        width: 165px;
+        height: 40px;
+        font-weight: 500;
+        padding: 2px;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: white;
+        background: rgba(139, 69, 19, 0.9);
+        cursor: pointer;
+        border-radius: 30px;
+        transition: background-color 0.6s ease;
+      }
+
+      .nav-button .btn:hover {
+        background-color: rgba(139, 69, 19, 0.7);
+        transform: translateY(-2px);
+        font-size: 15px;
+      }
+
+      #loginBtn {
+        margin-right: 10px;
+        background-image: url(images/enter.png);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 20px;
+        padding-left: 25px;
+        padding-right: 20px;
+      }
+      #registerBtn {
+        background-image: url(images/add.png);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 20px;
+        padding-left: 25px;
+        padding-right: 20px;
+      }
+      .nav-menu .btn {
+        display: none;
+      }
+      .link-add.first {
+        color: #fff;
+        text-transform: uppercase;
+        text-decoration: none;
+        background-color: rgba(165, 42, 42);
+        background-image: url(../images/addactivity.png);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 20px;
+        text-decoration: none;
+        border-radius: 10px;
+        padding-left: 35px;
+        padding-right: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .link-add.logout {
+        margin-left: 10px;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        background-color: rgba(165, 42, 42);
+        background-image: url(../images/logout.png);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 20px;
+        text-decoration: none;
+        border-radius: 10px;
+        padding-left: 35px;
+        padding-right: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .link-add.myuser {
+        margin-left: 10px;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        background-color: rgba(165, 42, 42);
+        background-image: url(../images/useruser2.png);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 20px;
+        text-decoration: none;
+        border-radius: 10px;
+        padding-left: 35px;
+        padding-right: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .link-add.star {
+        margin-left: 10px;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        background-color: rgba(165, 42, 42);
+        background-image: url(../images/star.png);
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 20px;
+        text-decoration: none;
+        border-radius: 10px;
+        padding-left: 35px;
+        padding-right: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .link-add:hover {
+        background-color: rgba(165, 42, 42, 0.8);
+        color: #fff;
+        font-size: 17px;
+        transform: translateY(-2px);
+        transition: 0.3s ease;
+      }
+      .page-info {
+        color: white;
+        text-align: center;
+        font-size: 18px;
+      }
+      .page-numbers {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="../aktivnosti/" class="nav-logo">
+        <p class="logopara">hp team™</p>
+      </a>
+      <div class="nav-menu">
+        <ul>
+          <li><a href="#" class="link" onclick="home()">Početna</a></li>
+          <li><a href="#" class="link">O nama</a></li>
+
+          <form method="GET">
+            <input
+              type="submit"
+              name="action"
+              value="Kreiraj aktivnost"
+              class="link-add first"
+            />
+            <input
+              type="submit"
+              name="action"
+              value="Odjava korisnik"
+              class="link-add logout"
+            />
+            <input
+              type="submit"
+              name="action"
+              value="Korisnik"
+              class="link-add myuser"
+            />
+
+            <input
+              type="submit"
+              value="omiljena"
+              name="action"
+              class="link-add star"
+            />
+          </form>
+        </ul>
+      </div>
+      <div class="nav-toggle" id="nav-toggle">
+        <i class="bx bx-menu"></i>
+      </div>
+    </nav>
+  </body>
+</html>

@@ -8,6 +8,9 @@
 
     class adminController
     {
+        function dostupneAktivnosti() {
+            include "../public/adminAktivnosti.php";
+        }
 
     function proveraKorisnik()
     {
@@ -61,6 +64,35 @@
         }
     }
 
+    function registracijaKorisnik() {
+        $imePrezime = isset($_POST['imePrezime']) ? $_POST['imePrezime'] : '';
+        $mejl = isset($_POST['mejl']) ? $_POST['mejl'] : '';
+        $sifra = isset($_POST['lozinka']) ? $_POST['lozinka'] : '';
+        $telefon = isset($_POST['telefon']) ? $_POST['telefon'] : '';
+        $pol = isset($_POST['pol']) ? $_POST['pol'] : '';
+        $interesovanje = isset($_POST['interesovanje']) ? $_POST['interesovanje'] : '';
+    
+        error_log("Ime i prezime: $imePrezime");
+        error_log("Mejl: $mejl");
+        error_log("Sifra: $sifra");
+        error_log("Telefon: $telefon");
+        error_log("Pol: $pol");
+        error_log("Interesovanje: $interesovanje");
+    
+        if (!empty($imePrezime) && !empty($mejl) && !empty($sifra) && !empty($telefon) && !empty($pol) && !empty($interesovanje)) {
+            $dao = new korisnikDAO();
+            if ($dao->registracijaKorisnik($imePrezime, $mejl, $sifra, $telefon, $pol, $interesovanje)) {
+                $msg = "Uspesno ste se registrovali";
+                include "../public/pocetna.php";
+            } else {
+                $msg = "Registracija nije uspela";
+                include "../public/registracija.php";
+            }
+        } else {
+            $msg = "Morate popuniti sva polja";
+            include "../public/registracija.php";
+        }
+    }
     function getKorisnikById()
     {
         $korisnik = new korisnikDAO();
@@ -90,79 +122,31 @@
             include "../public/adminStranica.php";
         }
     }
-
-    function updateKorisnik()
-    {
-        $imePrezime = isset($_POST["imePrezimeUpdate"])?$_POST["imePrezimeUpdate"]:"";
-        $mejl = isset($_POST["mejlAdresaUpdate"])?$_POST["mejlAdresaUpdate"]:"";
-        $sifra = isset($_POST["sifraUpdate"])?$_POST["sifraUpdate"]:"";
-        $telefon = isset($_POST["telefonUpdate"])?$_POST["telefonUpdate"]:"";
-        $pol = isset($_POST["polUpdate"])?$_POST["polUpdate"]:"";
-        $interesovanje = isset($_POST["interesovanjeUpdate"])?$_POST["interesovanjeUpdate"]:"";
-        $id = isset($_SESSION["korisnik"]["korisnikId"])?$_SESSION["korisnik"]["korisnikId"]:"";
-
-        if(!empty($imePrezime)&&!empty($mejl)&&!empty($sifra)&&!empty($telefon)&&!empty($pol)&&!empty($interesovanje))
-        {   
+//nova funkcija
+    function updateKorisnik() {
+        $sifra = isset($_POST["sifraUpdate"]) ? $_POST["sifraUpdate"] : "";
+        $interesovanje = isset($_POST["interesovanjeUpdate"]) ? $_POST["interesovanjeUpdate"] : "";
+        $id = isset($_SESSION["korisnik"]["korisnikId"]) ? $_SESSION["korisnik"]["korisnikId"] : "";
+    
+        if (!empty($sifra) && !empty($interesovanje)) {
             $dao = new korisnikDAO();
-
-            $izmenjen = $dao -> updateKorisnik($imePrezime, $mejl, $sifra, $telefon, $pol, $interesovanje, $id); 
-
-            if($izmenjen)
-            {
-                $_SESSION["korisnik"] = $dao -> getKorisnikById($_SESSION["korisnikId"]);
-                $msg = "Uspesno izmenjen korisnik ".$izmenjen;
+            $izmenjen = $dao->updateKorisnik($sifra, $interesovanje, $id);
+    
+            if ($izmenjen) {
+                $_SESSION["korisnik"] = $dao->getKorisnikById($id);
+                $msg = "Uspešno izmenjen korisnik.";
+                include "../public/korisnikStranica.php";
+            } else {
+                $_SESSION["korisnik"] = $dao->getKorisnikById($id);
+                $msg = "Nije uspelo ažuriranje korisnika.";
                 include "../public/korisnikStranica.php";
             }
-
-            else
-            {
-                $_SESSION["korisnik"] = $dao -> getKorisnikById($_SESSION["korisnikId"]);
-                $msg = "Nije uspelo update-ovanje korisnika ".$izmenjen." nesto";
-                include "../public/korisnikStranica.php";
-            }
-              
-        }
-
-        else
-        {    
-            $msg = "Morate popuniti sva polja";
+        } else {
+            $msg = "Morate popuniti sva polja.";
             include "../public/korisnikStranica.php";
         }
     }
-
-    function registracijaKorisnik()
-    {
-        $imePrezime = isset($_POST["imePrezime"])?$_POST["imePrezime"]:"";
-        $mejl = isset($_POST["mejl"])?$_POST["mejl"]:"";
-        $sifra = isset($_POST["sifra"])?$_POST["sifra"]:"";
-        $telefon = isset($_POST["telefon"])?$_POST["telefon"]:"";
-        $pol = isset($_POST["pol"])?$_POST["pol"]:"";
-        $interesovanje = isset($_POST["interesovanje"])?$_POST["interesovanje"]:"";
-
-        if(!empty($imePrezime)&&!empty($mejl)&&!empty($sifra)&&!empty($telefon)&&!empty($pol)&&!empty($interesovanje))
-        {
-            $dao = new korisnikDAO();
-
-            if($dao -> registracijaKorisnik($imePrezime, $mejl, $sifra, $telefon, $pol, $interesovanje))
-            {
-                $msg = "Uspesno ste se registrovali";
-                include "../public/pocetna.php";
-            }
-
-            else
-            {
-                $msg = "Registracija nije uspela";
-                include "../public/registracija.php";
-            }
-        }
-
-        else
-        {
-            $msg = "Morate popuniti sva polja";
-            include "../public/registracija.php";
-        }
-    }
-
+    
     function kreirajAktivnost()
     {
         $nazivAktivnosti = isset($_POST["nazivAktivnosti"])?$_POST["nazivAktivnosti"]:"";
@@ -210,9 +194,9 @@
 
         $id = isset($_GET["aktivnostId"])?$_GET["aktivnostId"]:"";
         setcookie("poslednja", $id, time() + 50, "/",);
-        $_SESSION["aktivnostId"] = $id;
+        $_SESSION["aktivnostId"] = (int)$id;
         $_SESSION["clanovi"] = $dao -> getClanovi($id);
-        include "../public/detaljnije.php";
+        include "../public/saznajVise.php";
     }
 
     function pridruziSe()
@@ -224,7 +208,7 @@
         if($postoji)
         {
             $msg = "Vec ste clan ove aktivnosti";
-            include "../public/detaljnije.php";
+            include "../public/saznajVise.php";
         }
 
         else
@@ -235,19 +219,20 @@
 
             $korisnikDAO = new korisnikDAO();
 
-            $ime = $korisnikDAO -> getKorisnikById($_SESSION["korisnikId"]);
+            $korisnik = $korisnikDAO -> getKorisnikById($_SESSION["korisnikId"]);
 
-            if($dao -> insertClanoviAktivnost($_SESSION["korisnikId"], $_SESSION["aktivnostId"], $aktivnost["nazivAktivnosti"], $ime["imePrezime"]))
+            if($dao -> insertClanoviAktivnost($_SESSION["korisnikId"], $_SESSION["aktivnostId"], $aktivnost["nazivAktivnosti"], $korisnik["imePrezime"]))
             {
                 $msg = "Uspesno ste se prijavili na ovu aktivnost";
                 $_SESSION["clanovi"] = $dao -> getClanovi($aktivnost["aktivnostId"]);
-                include "../public/detaljnije.php";
+                include "../public/saznajVise.php";
             }
 
             else
             {
                 $msg = "Greska pri prijavi na ovu aktivnost";
-                include "../public/detaljnije.php";
+                $_SESSION["clanovi"] = $dao -> getClanovi($aktivnost["aktivnostId"]);
+                include "../public/saznajVise.php";
             }
         }
     }
@@ -279,11 +264,11 @@
         {
             $page = $_GET["page-nr"] - 1;
             $start = $page * 2;
-            $_SESSION["limit"] = $dao -> getAllPagination($start, 2);
+            $_SESSION["limit"] = $dao -> getAllPagination($start, 3);
         }
 
         else {
-            $_SESSION["limit"] = $dao->getAllPagination(0, 2);
+            $_SESSION["limit"] = $dao->getAllPagination(0, 3);
         }
     }
 
@@ -292,7 +277,7 @@
         $aktivnost = new aktivnostDAO();
 
         $_SESSION["aktivnosti"] = $aktivnost -> getAll();
-        include "../public/glavnaStranica.php";
+        include "../public/gost.php";
     }
 
     function odjavaAdmin()
@@ -302,6 +287,7 @@
             include "../public/pocetna.php";
     }
 
+
     function odjavaKorisnik()
     {
         if($_SESSION["mejlAdresa"] != "")
@@ -309,6 +295,48 @@
             session_unset();
             session_destroy();
             include "../public/pocetna.php";
+        }
+    }
+
+    // Ova funkcija vraca naziv interesovanja korisnika
+    function getAllAktivnostiFiltrirane() {
+        $korisnik = new korisnikDAO();
+        
+    
+        $korisnikid = $_SESSION['korisnik']['korisnikId'];
+        
+        $interesovanje = $korisnik -> getIntresovanjeZaKorisnika($korisnikid);
+
+        if(!empty($interesovanje)) {
+            return $interesovanje;
+        } else {
+            echo "Nema interesovanja.";
+        }
+    }
+
+    // Ova funkcija vraca sve aktivnosti koje su po tipu korisnikova omiljena
+    function getInteresovanje() {
+        
+        $jedan = new korisnikDAO();
+
+        $nazivAktivnosti = $this -> getAllAktivnostiFiltrirane();
+        
+        switch($nazivAktivnosti) {
+            case "trcanje":
+                // $_SESSION["case"] = 1;
+               $_SESSION["interesovanja"] = $jedan -> getAllTipAktivnosti(1);
+                break;
+            case "planinarenje":
+                // $_SESSION["case"] = 2;
+                $_SESSION["interesovanja"] = $jedan -> getAllTipAktivnosti(2);
+                break;
+            case "biciklizam":
+                // $_SESSION["case"] = 3;
+                $_SESSION["interesovanja"] = $jedan -> getAllTipAktivnosti(3);
+                break;
+            default: 
+            echo "Nesto";
+            break;
         }
     }
 }

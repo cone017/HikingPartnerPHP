@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .nav {
+        position: fixed;
+        margin-top: 3px;
+        top: 0;
+        display: flex;
+        justify-content: space-around;
+        width: 90%;
+        border-radius: 30px;
+        height: 85px;
+        line-height: 100px;
+        background: linear-gradient(to top, #5e6342, rgba(94, 99, 66, 0.5));
+        z-index: 100;
+      }
+
+      .nav a {
+        text-decoration: none;
+      }
+
+      .nav-logo p {
+        color: white;
+        font-size: 19px;
+        font-family: cursive;
+        font-weight: 600;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        background-repeat: no-repeat;
+        padding-left: 24px;
+        background-image: url(../images/hiker.png);
+        background-position: left center;
+        background-size: 24px;
+      }
+
+      .nav-menu ul {
+        display: flex;
+      }
+      .nav-menu ul li {
+        list-style-type: none;
+        text-transform: uppercase;
+      }
+      .nav-menu ul li .link {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        font-size: 16px;
+        padding-bottom: 15px;
+        margin: 0 25px;
+      }
+      .link:hover {
+        border-bottom: 2px solid #fff;
+        transition: 0.3s ease;
+      }
+      .nav-button .btn {
+        width: 165px;
+        height: 40px;
+        font-weight: 500;
+        padding: 2px;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: white;
+        background: rgba(139, 69, 19, 0.9);
+        cursor: pointer;
+        border-radius: 30px;
+        transition: background-color 0.6s ease;
+      }
+
+      .nav-button .btn:hover {
+        background-color: rgba(139, 69, 19, 0.7);
+        transform: translateY(-2px);
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="#" class="nav-logo">
+        <p class="logopara">hp team™</p>
+      </a>
+      <div class="nav-menu">
+        <ul>
+          <li>
+            <a href="home.php" class="link" onclick="homepage()">Početna</a>
+          </li>
+          <li><a href="onama.php" class="link">O nama</a></li>
+        </ul>
+      </div>
+      <div class="nav-toogle" id="nav-toogle">
+        <i class="bx bx-menu"></i>
+      </div>
+    </nav>
+  </body>
+</html>

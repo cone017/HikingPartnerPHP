@@ -11,17 +11,17 @@
     </style>
 </head>
 <body>
-    <div class="div-wrapper">
+<div class="div-wrapper">
         <?php require_once("partials/navbarAktivnosti.html"); ?>
 
         <div class="wrapper-card">
             <div class="card-container">
                 <?php
-                $nr_of_rows = count($_SESSION["aktivnosti"]);
+                $nr_of_rows = count($_SESSION["interesovanja"]);
                 $pages = ceil($nr_of_rows / 2);
 
-                if (isset($_SESSION["limit"]) && is_array($_SESSION["limit"])) {
-                    foreach ($_SESSION["limit"] as $row) {
+                if (isset($_SESSION["interesovanja"]) && is_array($_SESSION["interesovanja"])) {
+                    foreach ($_SESSION["interesovanja"] as $row) {
                         $imageSrc = "";
                         if($row['tipAktivnostiId'] == 1) {
                             $imageSrc = "../images/runner.png";
@@ -34,13 +34,10 @@
                         <div class="card">
                             <p class="id"><img src="<?php echo htmlspecialchars($imageSrc); ?>" alt="nema" /></p>
                             <div class="card-content">
-                            <form method="GET">
-                                <input type="hidden" name="aktivnostId" value="<?=$row['aktivnostId']?>">
                                 <p class="naziv"><?php echo htmlspecialchars($row['nazivAktivnosti']); ?></p>
                                 <p class="kategorija"><b>Lokacija:</b>&nbsp;<?php echo htmlspecialchars($row['lokacija']); ?></p>
                                 <p class="datum"><b>Datum:</b>&nbsp;<?php echo htmlspecialchars($row['datumPocetka']); ?></p>
-                                <input type="submit" name="action" value="detaljnije">
-                            </form>
+                                <a href="" class="btn">Saznaj više...</a>
                             </div>
                         </div>
                         <?php
@@ -48,13 +45,12 @@
                 }
                 ?>
             </div>
-            
+
             <div class="paginationnew">
                 <div class="page-numbers" id="pageColor">
                     <?php for ($i = 1; $i <= $pages; $i++) { ?>
                         <a href="?action=page-nr&page-nr=<?= $i ?>"><?= $i ?></a>
-                    <?php } if (isset($_COOKIE["poslednja"]))
-                                echo $_COOKIE["poslednja"]; ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>
